@@ -10,7 +10,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/gotmc/libusb"
 	"github.com/shirou/gopsutil/disk"
 	strava "github.com/strava/go.strava"
 	"gopkg.in/ini.v1"
@@ -69,17 +68,6 @@ func findLezyneGPSVolume() (string, error) {
 	return "", errors.New("Lezyne GPS Volume not found")
 }
 
-func showVersion() {
-	version := libusb.GetVersion()
-	fmt.Printf(
-		"Using libusb version %d.%d.%d (%d)\n",
-		version.Major,
-		version.Minor,
-		version.Micro,
-		version.Nano,
-	)
-}
-
 func main() {
 	var accessToken string
 
@@ -96,7 +84,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	showVersion()
 	lezyne, err := findLezyneGPSVolume()
 	if err != nil {
 		log.Fatal(err)
